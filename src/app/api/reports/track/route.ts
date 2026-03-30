@@ -39,7 +39,7 @@ export async function GET(request: Request) {
       department: report.department,
       photoPath: report.photoPath,
       address: report.address,
-      history: report.history.map((h) => ({
+      history: report.history.map((h: any) => ({
         status: h.status,
         message: h.publicMessage,
         at: h.createdAt,

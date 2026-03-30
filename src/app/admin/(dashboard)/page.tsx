@@ -3,7 +3,7 @@ import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { requireStaff } from "@/lib/auth";
 import { categoryLabels, statusLabels, urgencyLabels } from "@/lib/labels";
-import type { IssueCategory, ReportStatus } from "@prisma/client";
+import { IssueCategory, Urgency, ReportStatus } from "@prisma/client";
 import { format } from "date-fns";
 
 export const dynamic = "force-dynamic";
@@ -141,7 +141,7 @@ export default async function AdminInboxPage({ searchParams }: Props) {
             No reports match filters.
           </li>
         )}
-        {reports.map((r) => (
+        {reports.map((r: any) => (
           <li key={r.id}>
             <Link
               href={`/admin/reports/${r.id}`}
@@ -153,13 +153,13 @@ export default async function AdminInboxPage({ searchParams }: Props) {
                 </p>
                 <p className="font-medium text-white">{r.title}</p>
                 <p className="mt-1 text-xs text-emerald-100/70">
-                  {categoryLabels[r.category]} · {urgencyLabels[r.urgency]} ·{" "}
+                  {categoryLabels[r.category as IssueCategory]} · {urgencyLabels[r.urgency as Urgency]} ·{" "}
                   {r.department.name}
                 </p>
               </div>
               <div className="text-right text-xs">
                 <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-emerald-100">
-                  {statusLabels[r.status]}
+                  {statusLabels[r.status as ReportStatus]}
                 </span>
                 <p className="mt-2 text-emerald-200/50">
                   {format(r.createdAt, "dd MMM yyyy HH:mm")}

@@ -110,7 +110,7 @@ export async function PATCH(
     return NextResponse.json({ error: "No changes" }, { status: 400 });
   }
 
-  const updated = await prisma.$transaction(async (tx) => {
+  const updated = await prisma.$transaction(async (tx: any) => {
     const r =
       Object.keys(data).length > 0
         ? await tx.report.update({

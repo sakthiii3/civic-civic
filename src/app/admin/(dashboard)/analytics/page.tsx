@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { requireStaff } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { categoryLabels, statusLabels } from "@/lib/labels";
+import { ReportStatus, IssueCategory } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 
@@ -40,12 +41,12 @@ export default async function AnalyticsPage() {
         <div className="rounded-2xl border border-white/10 bg-black/30 p-6">
           <h2 className="font-semibold text-white">By status</h2>
           <ul className="mt-4 space-y-2 text-sm">
-            {byStatus.map((b) => (
+            {byStatus.map((b: any) => (
               <li
                 key={b.status}
                 className="flex justify-between border-b border-white/5 py-2 text-emerald-100/90"
               >
-                <span>{statusLabels[b.status]}</span>
+                <span>{statusLabels[b.status as ReportStatus]}</span>
                 <span className="font-mono text-emerald-300">{b._count._all}</span>
               </li>
             ))}
@@ -54,12 +55,12 @@ export default async function AnalyticsPage() {
         <div className="rounded-2xl border border-white/10 bg-black/30 p-6">
           <h2 className="font-semibold text-white">By category</h2>
           <ul className="mt-4 space-y-2 text-sm">
-            {byCategory.map((b) => (
+            {byCategory.map((b: any) => (
               <li
                 key={b.category}
                 className="flex justify-between border-b border-white/5 py-2 text-emerald-100/90"
               >
-                <span>{categoryLabels[b.category]}</span>
+                <span>{categoryLabels[b.category as IssueCategory]}</span>
                 <span className="font-mono text-emerald-300">{b._count._all}</span>
               </li>
             ))}

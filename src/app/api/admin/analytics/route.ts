@@ -32,7 +32,7 @@ export async function GET() {
     }),
   ]);
 
-  const resolutionSamples = recentResolved.map((r) => {
+  const resolutionSamples = recentResolved.map((r: any) => {
     const ms = r.updatedAt.getTime() - r.createdAt.getTime();
     const hours = Math.round(ms / 36e5);
     return {
@@ -46,10 +46,10 @@ export async function GET() {
   return NextResponse.json({
     total,
     byStatus: Object.fromEntries(
-      byStatus.map((b) => [b.status, b._count._all]),
+      byStatus.map((b: any) => [b.status, b._count._all]),
     ),
     byCategory: Object.fromEntries(
-      byCategory.map((b) => [b.category, b._count._all]),
+      byCategory.map((b: any) => [b.category, b._count._all]),
     ),
     recentResolved: resolutionSamples,
   });
