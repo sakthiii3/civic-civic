@@ -23,17 +23,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
 
-  const token = await signStaffToken({
-    sub: staff.id,
-    email: staff.email,
-    name: staff.name,
-    role: staff.role,
-  });
+  try {
+    const token = await signStaffToken({
+      sub: staff.id,
+      email: staff.email,
+      name: staff.name,
+      role: staff.role,
+    });
 
-  await setSessionCookie(token);
+    await setSessionCookie(token);
 
-  return NextResponse.json({
-    ok: true,
-    staff: { name: staff.name, email: staff.email, role: staff.role },
-  });
+    return NextResponse.json({
+      ok: true,
+      staff: { name: staff.name, email: staff.email, role: staff.role },
+    });
+  } catch (e) {
+    return NextResponse.json(
+      { error: "Session creation failed", details: e instanceof Error ? e.message : String(e) },
+      { status: 500 },
+    );
+  }
 }
