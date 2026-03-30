@@ -5,9 +5,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(process.cwd()),
   },
-  experimental: {
-    serverComponentsExternalPackages: ["@prisma/client", "better-sqlite3"],
-  },
+  serverExternalPackages: ["@prisma/client", "better-sqlite3"],
 };
 
 export default nextConfig;
