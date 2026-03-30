@@ -1,9 +1,9 @@
 import Link from "next/link";
-import type { Prisma } from "@/generated/prisma/client";
+import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { requireStaff } from "@/lib/auth";
 import { categoryLabels, statusLabels, urgencyLabels } from "@/lib/labels";
-import type { IssueCategory, ReportStatus } from "@/generated/prisma/enums";
+import type { IssueCategory, ReportStatus } from "@prisma/client";
 import { format } from "date-fns";
 
 export const dynamic = "force-dynamic";

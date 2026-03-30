@@ -5,7 +5,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { departmentCodeForCategory } from "@/lib/routing";
 import { createTrackingCode } from "@/lib/tracking";
-import type { IssueCategory, Urgency } from "@/generated/prisma/enums";
+import type { IssueCategory, Urgency } from "@prisma/client";
 
 const categoryZ = z.enum([
   "POTHOLE",

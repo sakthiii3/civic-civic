@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
-import type { IssueCategory, Urgency } from "@/generated/prisma/enums";
+import type { IssueCategory, Urgency } from "@prisma/client";
 import { categoryLabels, urgencyLabels } from "@/lib/labels";
 import { MapPickerDynamic } from "./MapPickerDynamic";
 

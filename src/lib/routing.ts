@@ -1,4 +1,4 @@
-import type { IssueCategory } from "@/generated/prisma/enums";
+import type { IssueCategory } from "@prisma/client";
 
 /** Department codes seeded in DB — automated routing from report category */
 export function departmentCodeForCategory(category: IssueCategory): string {

@@ -1,13 +1,13 @@
 import "dotenv/config";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import { PrismaClient } from "../src/generated/prisma/client";
 import bcrypt from "bcryptjs";
 import {
+  PrismaClient,
   IssueCategory,
   ReportStatus,
   Urgency,
   StaffRole,
-} from "../src/generated/prisma/enums";
+} from "@prisma/client";
 
 const connectionString =
   process.env.DATABASE_URL ?? "file:./prisma/dev.db";

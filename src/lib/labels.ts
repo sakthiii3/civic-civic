@@ -1,4 +1,4 @@
-import type { IssueCategory, ReportStatus, Urgency } from "@/generated/prisma/enums";
+import type { IssueCategory, ReportStatus, Urgency } from "@prisma/client";
 
 export const categoryLabels: Record<IssueCategory, string> = {
   POTHOLE: "Pothole / road damage",
