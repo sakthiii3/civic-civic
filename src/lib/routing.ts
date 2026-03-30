@@ -1,4 +1,4 @@
-import type { IssueCategory } from "@prisma/client";
+import { IssueCategory } from "@/lib/types";
 
 /** Department codes seeded in DB — automated routing from report category */
 export function departmentCodeForCategory(category: IssueCategory): string {

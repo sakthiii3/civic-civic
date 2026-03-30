@@ -5,7 +5,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { departmentCodeForCategory } from "@/lib/routing";
 import { createTrackingCode } from "@/lib/tracking";
-import type { IssueCategory, Urgency } from "@prisma/client";
+import { IssueCategory, ReportStatus, Urgency } from "@/lib/types";
 
 const categoryZ = z.enum([
   "POTHOLE",
@@ -121,7 +121,7 @@ export async function POST(request: Request) {
     }
 
     const data = parsed.data;
-    const deptCode = departmentCodeForCategory(data.category);
+    const deptCode = departmentCodeForCategory(data.category as IssueCategory);
     const department = await prisma.department.findUnique({
       where: { code: deptCode },
     });
@@ -164,8 +164,8 @@ export async function POST(request: Request) {
         trackingCode,
         title: data.title,
         description: data.description,
-        category: data.category,
-        urgency: data.urgency,
+        category: data.category as IssueCategory,
+        urgency: data.urgency as Urgency,
         lat: data.lat,
         lng: data.lng,
         address: data.address,
@@ -181,7 +181,7 @@ export async function POST(request: Request) {
     await prisma.reportStatusHistory.create({
       data: {
         reportId: report.id,
-        status: "SUBMITTED",
+        status: ReportStatus.SUBMITTED,
         publicMessage:
           "We received your report. Reference: " + trackingCode + ".",
       },

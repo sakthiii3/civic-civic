@@ -10,7 +10,7 @@ import {
   Popup,
   useMap,
 } from "react-leaflet";
-import type { IssueCategory, ReportStatus, Urgency } from "@prisma/client";
+import { IssueCategory, ReportStatus, Urgency } from "@/lib/types";
 import { categoryLabels, statusLabels, urgencyLabels } from "@/lib/labels";
 
 export type MapReport = {

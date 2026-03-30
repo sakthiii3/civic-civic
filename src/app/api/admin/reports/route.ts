@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { requireStaff } from "@/lib/auth";
-import type { IssueCategory, ReportStatus } from "@prisma/client";
+import { IssueCategory, ReportStatus } from "@/lib/types";
 
 export async function GET(request: Request) {
   const { staff } = await requireStaff();

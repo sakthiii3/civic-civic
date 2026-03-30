@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
-import type { ReportStatus } from "@prisma/client";
+import { ReportStatus } from "@/lib/types";
 import { categoryLabels, statusLabels, urgencyLabels } from "@/lib/labels";
 
 type Dept = { id: string; name: string; code: string };
@@ -41,11 +41,11 @@ type ReportPayload = {
 };
 
 const statusOptions: ReportStatus[] = [
-  "SUBMITTED",
-  "ACKNOWLEDGED",
-  "IN_PROGRESS",
-  "RESOLVED",
-  "REJECTED",
+  ReportStatus.SUBMITTED,
+  ReportStatus.ACKNOWLEDGED,
+  ReportStatus.IN_PROGRESS,
+  ReportStatus.RESOLVED,
+  ReportStatus.REJECTED,
 ];
 
 export function AdminReportClient({

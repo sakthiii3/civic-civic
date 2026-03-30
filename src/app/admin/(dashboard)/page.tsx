@@ -3,7 +3,7 @@ import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { requireStaff } from "@/lib/auth";
 import { categoryLabels, statusLabels, urgencyLabels } from "@/lib/labels";
-import { IssueCategory, Urgency, ReportStatus } from "@prisma/client";
+import { IssueCategory, Urgency, ReportStatus } from "@/lib/types";
 import { format } from "date-fns";
 
 export const dynamic = "force-dynamic";

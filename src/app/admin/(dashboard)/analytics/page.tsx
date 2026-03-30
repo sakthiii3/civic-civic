@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { requireStaff } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { categoryLabels, statusLabels } from "@/lib/labels";
-import { ReportStatus, IssueCategory } from "@prisma/client";
+import { ReportStatus, IssueCategory } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 

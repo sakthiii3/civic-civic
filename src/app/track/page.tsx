@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { categoryLabels, statusLabels, urgencyLabels } from "@/lib/labels";
-import type { IssueCategory, ReportStatus, Urgency } from "@prisma/client";
+import { IssueCategory, ReportStatus, Urgency } from "@/lib/types";
 import Image from "next/image";
 
 type History = {

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireStaff } from "@/lib/auth";
-import type { ReportStatus } from "@prisma/client";
+import { ReportStatus } from "@/lib/types";
 
 const patchSchema = z.object({
   status: z

@@ -1,12 +1,12 @@
 import "dotenv/config";
 import bcrypt from "bcryptjs";
 import {
-  PrismaClient,
   IssueCategory,
   ReportStatus,
   Urgency,
   StaffRole,
-} from "@prisma/client";
+} from "../src/lib/types";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 

@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
-import type { IssueCategory, Urgency } from "@prisma/client";
+import { IssueCategory, Urgency } from "@/lib/types";
 import { categoryLabels, urgencyLabels } from "@/lib/labels";
 import { MapPickerDynamic } from "./MapPickerDynamic";
 
@@ -15,8 +15,8 @@ const defaultLng = 85.3096;
 export function ReportForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState<IssueCategory>("POTHOLE");
-  const [urgency, setUrgency] = useState<Urgency>("MEDIUM");
+  const [category, setCategory] = useState<IssueCategory>(IssueCategory.POTHOLE);
+  const [urgency, setUrgency] = useState<Urgency>(Urgency.MEDIUM);
   const [lat, setLat] = useState(String(defaultLat));
   const [lng, setLng] = useState(String(defaultLng));
   const [address, setAddress] = useState("");
