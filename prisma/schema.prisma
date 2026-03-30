@@ -1,0 +1,101 @@
+// Civic Issue Reporting — SQLite for local dev (swap URL for PostgreSQL in production)
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum IssueCategory {
+  POTHOLE
+  STREETLIGHT
+  TRASH
+  WATER_LEAK
+  PARK_MAINTENANCE
+  OTHER
+}
+
+enum Urgency {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum ReportStatus {
+  SUBMITTED
+  ACKNOWLEDGED
+  IN_PROGRESS
+  RESOLVED
+  REJECTED
+}
+
+enum StaffRole {
+  ADMIN
+  STAFF
+}
+
+model Department {
+  id        String   @id @default(cuid())
+  name      String
+  code      String   @unique
+  createdAt DateTime @default(now())
+  staff     StaffUser[]
+  reports   Report[]
+}
+
+model StaffUser {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         StaffRole @default(STAFF)
+  departmentId String?
+  department   Department? @relation(fields: [departmentId], references: [id])
+  createdAt    DateTime @default(now())
+  statusNotes  ReportStatusHistory[]
+}
+
+model Report {
+  id             String        @id @default(cuid())
+  trackingCode   String        @unique
+  title          String
+  description    String
+  category       IssueCategory
+  urgency        Urgency       @default(MEDIUM)
+  status         ReportStatus  @default(SUBMITTED)
+  lat            Float
+  lng            Float
+  address        String?
+  photoPath      String?
+  voiceNotePath  String?
+  citizenName    String?
+  citizenPhone   String?
+  citizenEmail   String?
+  departmentId   String
+  department     Department    @relation(fields: [departmentId], references: [id])
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  history        ReportStatusHistory[]
+
+  @@index([status])
+  @@index([category])
+  @@index([departmentId])
+  @@index([createdAt])
+}
+
+model ReportStatusHistory {
+  id         String   @id @default(cuid())
+  reportId   String
+  report     Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  status     ReportStatus
+  note       String?
+  publicMessage String?
+  staffId    String?
+  staff      StaffUser? @relation(fields: [staffId], references: [id])
+  createdAt  DateTime @default(now())
+
+  @@index([reportId])
+}
