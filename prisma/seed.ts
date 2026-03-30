@@ -33,7 +33,7 @@ async function main() {
 
   const [pw, pwr, san, park] = depts;
 
-  const hash = await bcrypt.hash("admin123", 10);
+  const hash = await bcrypt.hash("123456", 10);
   await prisma.staffUser.create({
     data: {
       email: "admin@jharkhand.gov.in",
@@ -47,7 +47,7 @@ async function main() {
   await prisma.staffUser.create({
     data: {
       email: "sanitation@jharkhand.gov.in",
-      passwordHash: await bcrypt.hash("staff123", 10),
+      passwordHash: await bcrypt.hash("123456", 10),
       name: "Sanitation Desk",
       role: StaffRole.STAFF,
       departmentId: san.id,
